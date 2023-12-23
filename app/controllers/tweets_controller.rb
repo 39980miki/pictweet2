@@ -16,6 +16,7 @@ class TweetsController < ApplicationController
   end
 
   def destroy
+    #ビューファイルへツイート情報を受け渡す必要が無いため、インスタンス変数は使用しない。
     tweet = Tweet.find(params[:id])
     #パラメーターとして受け取ったparams[:id]をもとに、削除したいツイートをfindメソッドを用いて取得
     tweet.destroy
@@ -24,6 +25,13 @@ class TweetsController < ApplicationController
 
   def edit
     @tweet = Tweet.find(params[:id])
+  end
+
+  def update
+    #destroyアクション同様、インスタンス変数は使用しない。
+    tweet = Tweet.find(params[:id])
+    tweet.update(tweet_params)
+    redirect_to root_path
   end
 
   private
