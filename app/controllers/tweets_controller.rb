@@ -18,7 +18,8 @@ class TweetsController < ApplicationController
   def destroy
     tweet = Tweet.find(params[:id])
     #パラメーターとして受け取ったparams[:id]をもとに、削除したいツイートをfindメソッドを用いて取得
-    tweet.destroyredirect_to root_path
+    tweet.destroy
+    redirect_to root_path
   end
 
   private
