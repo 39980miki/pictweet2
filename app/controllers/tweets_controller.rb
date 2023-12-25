@@ -34,6 +34,10 @@ class TweetsController < ApplicationController
     redirect_to root_path
   end
 
+  def show
+    #showアクションでは、詳細表示したいツイートの情報をビューに受け渡すだけ
+    @tweet = Tweet.find(params[:id])
+
   private
   def tweet_params
     params.require(:tweet).permit(:name, :image, :text)
