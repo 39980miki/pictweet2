@@ -37,6 +37,7 @@ class TweetsController < ApplicationController
   def show
     #showアクションでは、詳細表示したいツイートの情報をビューに受け渡すだけ
     @tweet = Tweet.find(params[:id])
+  end
 
   private
   def tweet_params
