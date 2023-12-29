@@ -3,8 +3,10 @@ class TweetsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
 
   def index
-    @tweets = Tweet.includes(:user)
+    @tweets = Tweet.includes(:user).order("created_at DESC")
     #allメソッドで、tweetsテーブル全てのレコードをインスタンス変数に代入
+    #N+1問題解消のためincludesメソッド
+    #orderメソッドの引数として、レコードが作成された日時情報created_atカラムを新しいものから古いものDESC(ASCは古いものから新しいもの)
   end
 
   def new
