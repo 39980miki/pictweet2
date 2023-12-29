@@ -3,7 +3,7 @@ class TweetsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
 
   def index
-    @tweets = Tweet.all 
+    @tweets = Tweet.includes(:user)
     #allメソッドで、tweetsテーブル全てのレコードをインスタンス変数に代入
   end
 
