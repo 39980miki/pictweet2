@@ -41,6 +41,7 @@ class TweetsController < ApplicationController
   def show
     #showアクションでは、詳細表示したいツイートの情報をビューに受け渡すだけ
     @tweet = Tweet.find(params[:id])
+    @comment = Comment.new #コメントを新規作成する場合
   end
 
   private
