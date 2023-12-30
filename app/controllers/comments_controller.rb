@@ -2,6 +2,8 @@ class CommentsController < ApplicationController
   def create
     Comment.create(comment_params)
     #createメソッドの引数では、ストロングパロメーターを用いて保存できるカラムを指定している
+    redirect_to "/tweets/#{comment.tweet.id}" #コメントと結びつくツイートの詳細画面に遷移する
+    #tweetsコントローラーのshowアクションを実行するには、ツイートidが必要のため、ストロングパロメーターを用いた上で変数commentに代入
   end
 
   private
