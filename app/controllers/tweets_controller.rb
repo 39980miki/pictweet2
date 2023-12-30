@@ -40,7 +40,13 @@ class TweetsController < ApplicationController
 
   def show
     #showアクションでは、詳細表示したいツイートの情報をビューに受け渡すだけ
-    @tweet = Tweet.find(params[:id])
+    @comment = Comment.new #コメントを新規作成する場合
+    #tweets/show.html.erbでform_withを使用し、comments#createを実行するリクエストを飛ばしてたいので、上記のインスタンス変数を生成
+    @comments = @tweet.comments.includes(:user)
+    #tweetsテーブルとcommentsテーブルはアソシエーションが組まれているので、＠tweets.commentsとすることで、@tweetへ投稿されたすべてのコメントを取得できる
+    #ビューでは誰かのコメントを明らかにするため、アソシエーションを使ってユーザーのレコードを取得する処理を繰り返す
+    #これがN+1問題を発生させるので、includesメソッドを使用
+    #コントローラーであるツイートについて投稿されたコメントの全レコードを取得することができたので、これをビューに表示する
   end
 
   private
