@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:edit, :show]
-  before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_index, except: [:index, :show, :search]
 
   def index
     @tweets = Tweet.includes(:user).order("created_at DESC")
@@ -47,6 +47,11 @@ class TweetsController < ApplicationController
     #ビューでは誰かのコメントを明らかにするため、アソシエーションを使ってユーザーのレコードを取得する処理を繰り返す
     #これがN+1問題を発生させるので、includesメソッドを使用
     #コントローラーであるツイートについて投稿されたコメントの全レコードを取得することができたので、これをビューに表示する
+  end
+
+  def search
+    @tweets = Tweet.search(params[:keyword])
+    #searchメソッドの引数にparams[:keyword]と記述して、検索結果を渡している
   end
 
   private
